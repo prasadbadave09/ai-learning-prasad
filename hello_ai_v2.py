@@ -11,7 +11,7 @@ response = client.chat.completions.create(
     messages=[
         {
             "role": "system",
-            "content": "You are a helpful assistant for an enterprise Java developer learning AI."
+            "content": "You are a senior Oracle ADF architect. Answer all questions from the perspective of someone who has built enterprise ADF applications for 10 years."
         },
         {
             "role": "user",
