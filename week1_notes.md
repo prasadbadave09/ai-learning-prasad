@@ -7,6 +7,9 @@
 - adf_explainer.py — ADF code review tool
 - adf_explainer_v2.py — improved with few-shot + chain-of-thought
 - adf_schema_doc.py — ADF schema documentation generator
+- adf_explainer_json.py — structured JSON output version
+- prompt_library.py — reusable prompt templates
+- test_prompt_library.py — tests for the prompt library
 
 ## What I understood
 
@@ -37,7 +40,16 @@ The system prompt is the developer's control lever.
 Every agent in an agentic pipeline is just a different system prompt 
 giving the LLM a different role and responsibility.
 
+**Structured JSON output** forces the LLM to return machine-readable 
+data instead of plain text, by specifying the exact JSON structure in 
+the system prompt and instructing "no explanation, no markdown, raw JSON 
+only." Critical for agentic pipelines — one agent's JSON output becomes 
+the next agent's input. Also needs defensive parsing (strip markdown 
+fences) since the model doesn't always follow instructions perfectly.
+
+**Prompt library** centralizes prompts into reusable, parameterized 
+functions instead of hardcoding them in every script. Update once, 
+use everywhere — same principle as a utility class in Java.
+
 ## Next week focus
-- Structured JSON output from LLM
-- Prompt library
 - Connect external API + LLM in one pipeline
