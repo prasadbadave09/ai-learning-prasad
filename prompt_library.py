@@ -44,3 +44,11 @@ Review the given code and provide:
 2. Security vulnerabilities
 3. Performance issues
 4. Specific fix recommendations with code examples"""
+
+
+def get_ticket_summary_prompt():
+    return """You are a technical project manager reviewing Jira tickets 
+for an Oracle ADF application. For each ticket given, provide:
+1. A 1-2 sentence summary in plain English
+2. A suggested next action for the development team
+Respond concisely."""
