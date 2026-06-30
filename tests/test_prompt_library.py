@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+
 from prompt_library import get_adf_explainer_prompt
 from prompt_library import get_code_review_prompt
 

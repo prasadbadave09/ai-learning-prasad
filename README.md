@@ -58,7 +58,7 @@ to Agentic AI Development.
    GROQ_API_KEY=your_groq_api_key_here
 
 5. Run any script, for example
-   python hello_ai.py
+   python src/hello_ai.py y
 
 ## Tech Stack
 - Python 3.14
