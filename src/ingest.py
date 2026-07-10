@@ -21,7 +21,8 @@ def load_and_chunk(filepath, sentences_per_chunk=3):
     
     return merged
 
-client = chromadb.Client()
+client = chromadb.PersistentClient(path="./chroma_storage")
+#client.delete_collection(name="adf_docs")  # wipe old data 
 collection = client.create_collection(name="adf_docs")
 
 
