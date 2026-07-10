@@ -67,4 +67,4 @@ to Agentic AI Development.
 
 ## Learning Notes
 See [week1_notes.md](./week1_notes.md) for detailed concepts learned 
-each week.   
+each week.

@@ -1,0 +1,92 @@
+Oracle ADF Overview
+
+Oracle Application Development Framework (Oracle ADF) is Oracle’s
+end-to-end Java EE framework for building enterprise web applications.
+It follows the Model-View-Controller (MVC) architecture and provides a
+productive development environment through Oracle JDeveloper. Oracle ADF
+reduces the amount of boilerplate code developers need to write by
+providing reusable business components, declarative development, data
+binding, and rich user interface components.
+
+Architecture
+
+Oracle ADF is divided into several layers:
+
+-   ADF Business Components (ADF BC): Implements the business service
+    layer. Core objects include Entity Objects (EO), View Objects (VO),
+    Application Modules (AM), and View Links.
+-   ADF Model: Connects the business services with the presentation
+    layer using the binding framework.
+-   ADF Controller: Manages navigation, task flows, and application
+    control.
+-   ADF Faces: Provides a rich set of JSF-based UI components.
+
+Key Components
+
+Entity Object (EO)
+
+Represents a database table and contains business rules, validations,
+and attribute definitions.
+
+View Object (VO)
+
+Retrieves data from one or more Entity Objects or SQL queries. View
+Objects can be read-only or updatable.
+
+Application Module (AM)
+
+Acts as the transaction boundary. It groups View Objects and manages
+database connections and commits or rollbacks.
+
+View Link
+
+Defines relationships between View Objects and enables master-detail
+behavior.
+
+Data Binding
+
+The ADF Binding Layer automatically connects UI components with business
+services. Developers typically use the Data Controls panel in JDeveloper
+to drag and drop data collections onto pages. This approach minimizes
+manual coding while maintaining consistency across the application.
+
+Task Flows
+
+ADF Task Flows encapsulate business processes. They may be bounded or
+unbounded. Bounded task flows support features such as transaction
+control, reusable modules, parameters, and exception handling.
+
+Security
+
+ADF Security integrates with Oracle Platform Security Services (OPSS).
+Authentication is commonly configured using WebLogic authentication
+providers, while authorization is managed through application roles and
+page permissions.
+
+Performance Best Practices
+
+-   Enable View Object range paging where appropriate.
+-   Fetch only required attributes.
+-   Avoid unnecessary View Object executions.
+-   Tune Application Module pooling.
+-   Use indexes for frequently queried database columns.
+-   Reduce unnecessary partial page refresh operations.
+
+Deployment
+
+Applications are packaged as EAR files and deployed to Oracle WebLogic
+Server. Typical deployment steps include:
+
+1.  Build the application.
+2.  Generate the EAR archive.
+3.  Deploy to WebLogic.
+4.  Configure JDBC data sources.
+5.  Verify application startup and logs.
+
+Conclusion
+
+Oracle ADF remains a strong framework for enterprise applications that
+require rapid development, robust security, declarative programming, and
+deep integration with Oracle technologies. Proper architecture,
+efficient Business Components, and careful performance tuning
+significantly improve maintainability and scalability.
