@@ -38,13 +38,37 @@ def brd_node(state: GraphState) -> GraphState:
     return {"brd": brd}
 
 
+def tesc_spec_node(state: GraphState) -> GraphState:
+    brd = state["brd"]
+
+    messages = [
+        {
+            "role": "system",
+            "content": "You are an expert technical architect who writes the techincal specifiaction document based on the given BRD. Do not add any outside facts, context and be onpoint to BRD"
+        },
+        {
+            "role": "user",
+            "content": brd
+        }
+    ]
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=messages
+    )
+
+    tech_spec = response.choices[0].message.content
+    return {"tech_spec": tech_spec}
+
 
 graph = StateGraph(GraphState)
 
 graph.add_node("BRD", brd_node)
+graph.add_node("Tech_Spec", tesc_spec_node)
 
 graph.set_entry_point("BRD")
-graph.add_edge("BRD", END)
+graph.add_edge("BRD", "Tech_Spec")
+graph.add_edge("Tech_Spec", END)
 
 app = graph.compile()
 
