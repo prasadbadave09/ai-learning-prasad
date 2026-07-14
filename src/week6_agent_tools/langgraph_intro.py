@@ -1,4 +1,11 @@
 from typing import TypedDict
+from groq import Groq
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+client = Groq(api_key= os.getenv("GROQ_API_KEY"))
 
 class GraphState(TypedDict):
     topic: str
@@ -7,14 +14,47 @@ class GraphState(TypedDict):
 
 def research_node(state: GraphState) -> GraphState:
     topic = state["topic"]
-    # For now, fake the "research" - just simulate it
-    fake_research = f"Some research notes about {topic}: Oracle ADF is a Java framework for enterprise applications."
-    return {"research_notes": fake_research}    
+
+    messages = [
+        {
+            "role": "system",
+            "content": "You are an expert researcher who researches the given topic and prepares detailed notes."
+        },
+        {
+            "role": "user",
+            "content": topic
+        }
+    ]
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=messages
+    )
+
+    research_notes = response.choices[0].message.content
+    return {"research_notes": research_notes}
 
 def summarize_node(state: GraphState) -> GraphState:
     research_notes = state["research_notes"]
-    fake_summary = f"Summary: {research_notes[:50]}..."
-    return {"summary": fake_summary}
+
+    messages = [
+        {
+            "role": "system",
+            "content": "You are an expert summarizer. Summarize ONLY the information contained in the provided research notes. Do not add any outside facts, context, or knowledge not present in the notes."
+        },
+        {
+            "role": "user",
+            "content": research_notes
+        }
+    ]
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=messages
+    )
+
+    research_summary = response.choices[0].message.content
+    return {"summary": research_summary}
 
 from langgraph.graph import StateGraph, END
 
