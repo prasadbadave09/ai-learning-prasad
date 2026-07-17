@@ -1,0 +1,7 @@
+Customer Order Search
+
+Requirement:
+
+The Customer Support team needs a way to quickly locate customer orders. Currently, they have to browse through multiple pages of order history, which makes it difficult to assist customers promptly. 
+They should be able to search using Order ID, Customer Name, Email Address, or Phone Number. The search results should only include orders placed within the last two years and should respect user roles
+ so that support agents only see orders assigned to their region.

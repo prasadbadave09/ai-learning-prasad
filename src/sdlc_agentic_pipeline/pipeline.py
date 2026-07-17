@@ -123,9 +123,16 @@ graph.add_edge("Stories", END)
 app = graph.compile()
 
 
+def load_feature_request(filepath):
+
+    with open(filepath,"r") as file:
+        content = file.read()
+
+    return content
+
 result = app.invoke(
     {
-        "feature_request": "Add a search bar to the employee dashboard that lets HR staff quickly find employee records by name, department, or employee ID."
+        "feature_request": load_feature_request("feature_request.txt")
     }
 )
 print(result)
