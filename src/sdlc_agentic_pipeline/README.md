@@ -39,10 +39,13 @@ GROQ_API_KEY=your_groq_api_key_here
 
 ## Usage
 
+Edit `feature_request.txt` with your feature request (can be a few 
+sentences — meeting notes, an email, or a stakeholder ask), then run:
+
 python pipeline.py
 
-Currently the feature request is hardcoded in the `app.invoke(...)` call 
-at the bottom of the script. Edit that string to try a different feature.
+The pipeline reads `feature_request.txt` from the same folder and prints 
+the final state (BRD, Tech Spec, Epics, Stories) to the console.
 
 ## Example run
 
@@ -101,7 +104,6 @@ sanity-check.
 
 ## Next steps / possible extensions
 
-- Read `feature_request` from a file or CLI argument instead of hardcoding it
 - Add a real Jira integration (via tool-use, similar to Week 6's agent) 
   to actually create Epics/Stories as tickets, rather than just text output
 - Add conditional edges — e.g., route back to BRD node for clarification 
