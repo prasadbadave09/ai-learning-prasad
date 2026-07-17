@@ -61,14 +61,47 @@ def tesc_spec_node(state: GraphState) -> GraphState:
     return {"tech_spec": tech_spec}
 
 
+def epeic_node(state: GraphState) -> GraphState:
+    tech_spec = state["tech_spec"]
+
+    messages = [
+{
+    "role": "system",
+    "content": (
+        "You are an expert agile product owner who breaks down a technical "
+        "specification into Epics. An Epic is a large body of work that can "
+        "be broken down into smaller user stories. For each Epic, provide: "
+        "a title, a short description, and its scope. "
+        "Base the Epics ONLY on the given technical specification — "
+        "do not invent scope or components not mentioned in it."
+    )
+},
+        {
+            "role": "user",
+            "content": tech_spec
+        }
+    ]
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=messages
+    )
+
+    epics = response.choices[0].message.content
+    return {"epics": epics}
+
+
+
 graph = StateGraph(GraphState)
 
 graph.add_node("BRD", brd_node)
 graph.add_node("Tech_Spec", tesc_spec_node)
+graph.add_node("Epics", epeic_node)
 
 graph.set_entry_point("BRD")
 graph.add_edge("BRD", "Tech_Spec")
-graph.add_edge("Tech_Spec", END)
+graph.add_edge("Tech_Spec", "Epics")
+graph.add_edge("Epics", END)
 
 app = graph.compile()
 
