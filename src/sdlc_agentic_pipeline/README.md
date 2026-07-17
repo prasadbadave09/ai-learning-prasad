@@ -30,6 +30,24 @@ State (`GraphState`) flows through all 4 nodes: each node reads what it
 needs from state, and returns only the field it updates — LangGraph merges 
 this into the growing state object automatically.
 
+
+## Architecture
+
+```mermaid
+flowchart TD
+    A[feature_request.txt] --> B[BRD node]
+    B --> C[Tech Spec node]
+    C --> D[Epics node]
+    D --> E[Stories node]
+    E --> F[Final state: BRD, Tech Spec, Epics, Stories]
+```
+
+Each node is grounded strictly to the previous node's output — no node 
+uses the LLM's own general knowledge about the topic, only the text 
+handed to it by the prior stage. See "Known Limitations / Lessons Learned" 
+for why this matters.
+
+
 ## Setup
 
 pip install langgraph groq python-dotenv
